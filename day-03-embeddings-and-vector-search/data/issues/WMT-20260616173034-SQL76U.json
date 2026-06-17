@@ -1,0 +1,18 @@
+{
+  "issue_id": "WMT-20260616173034-SQL76U",
+  "status": "created",
+  "created_at": "2026-06-16T17:30:34.467Z",
+  "customer_issue": "Customer is dissatisfied with the design and is expressing frustration, calling it poor design.",
+  "category": "product_quality",
+  "urgency": "low",
+  "summary": "Customer is unhappy with the product design and considers it poor.",
+  "suggested_response": "Thank you for your feedback regarding the design. We appreciate your input and will share it with our product team to help improve future designs.",
+  "policy": {
+    "model_urgency": "low",
+    "minimum_urgency": "low",
+    "enforced_urgency": "low",
+    "urgency_overridden": false,
+    "enforcement_reason": "No high-risk urgency signals detected.",
+    "prompt_injection_detected": false
+  }
+}

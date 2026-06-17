@@ -1,0 +1,18 @@
+{
+  "issue_id": "WMT-20260616175047-1SGAGS",
+  "status": "created",
+  "created_at": "2026-06-16T17:50:47.053Z",
+  "customer_issue": "Customer is unable to load the onboarding page for Mexico marketplace as a seller.",
+  "category": "technical",
+  "urgency": "high",
+  "summary": "Onboarding page for Mexico marketplace not loading for seller.",
+  "suggested_response": "We're sorry you're experiencing issues loading the Mexico onboarding page. Our technical team will investigate and contact you with a solution as soon as possible.",
+  "policy": {
+    "model_urgency": "high",
+    "minimum_urgency": "low",
+    "enforced_urgency": "high",
+    "urgency_overridden": false,
+    "enforcement_reason": "No high-risk urgency signals detected.",
+    "prompt_injection_detected": false
+  }
+}

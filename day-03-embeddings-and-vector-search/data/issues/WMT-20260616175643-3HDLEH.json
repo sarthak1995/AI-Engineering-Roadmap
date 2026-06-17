@@ -1,0 +1,18 @@
+{
+  "issue_id": "WMT-20260616175643-3HDLEH",
+  "status": "created",
+  "created_at": "2026-06-16T17:56:43.074Z",
+  "customer_issue": "Customer is facing an issue while logging into the system.",
+  "category": "account",
+  "urgency": "high",
+  "summary": "Customer cannot log into their account.",
+  "suggested_response": "We're sorry you're having trouble logging in. Can you please provide any error messages you see or describe what happens when you try to log in? We'll help you resolve this as soon as possible.",
+  "policy": {
+    "model_urgency": "high",
+    "minimum_urgency": "medium",
+    "enforced_urgency": "high",
+    "urgency_overridden": false,
+    "enforcement_reason": "Detected a support issue that is not clearly urgent or critical.",
+    "prompt_injection_detected": false
+  }
+}

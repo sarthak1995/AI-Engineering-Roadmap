@@ -1,0 +1,10 @@
+{
+  "issue_id": "WMT-20260616172539-UELE8E",
+  "status": "created",
+  "created_at": "2026-06-16T17:25:39.123Z",
+  "customer_issue": "The website is not mobile friendly.",
+  "category": "technical",
+  "urgency": "low",
+  "summary": "Customer reports that the website is not mobile friendly.",
+  "suggested_response": "Thank you for your feedback. We are aware of the issue and will work to improve the mobile experience. If you need help accessing specific features, please let us know."
+}

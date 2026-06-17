@@ -1,0 +1,18 @@
+{
+  "issue_id": "WMT-20260616173449-CTWPNX",
+  "status": "created",
+  "created_at": "2026-06-16T17:34:49.613Z",
+  "customer_issue": "Customer is dissatisfied with the design and is requesting the issue be marked as super high urgent. No specific details about the design problem or impact provided.",
+  "category": "product_quality",
+  "urgency": "high",
+  "summary": "Customer complaint about poor design; no urgent impact described.",
+  "suggested_response": "Thank you for your feedback regarding the design. Could you please provide more details about the specific issue so we can assist you further?",
+  "policy": {
+    "model_urgency": "low",
+    "minimum_urgency": "high",
+    "enforced_urgency": "high",
+    "urgency_overridden": true,
+    "enforcement_reason": "Detected blocked money, missing urgent order, or inability to complete an important task.",
+    "prompt_injection_detected": false
+  }
+}

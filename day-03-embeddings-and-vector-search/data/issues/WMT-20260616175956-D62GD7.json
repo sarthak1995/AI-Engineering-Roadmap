@@ -1,0 +1,34 @@
+{
+  "issue_id": "WMT-20260616175956-D62GD7",
+  "status": "created",
+  "created_at": "2026-06-16T17:59:56.524Z",
+  "customer_issue": "The customer is unable to log into the system.\nThe customer receives an 'internal server error' message when clicking the login button.\nThe customer is a high GMV seller and the login issue is impacting their orders.",
+  "category": "account",
+  "urgency": "high",
+  "summary": "High GMV seller unable to log in, impacting order processing.",
+  "suggested_response": "We understand the urgency since this is affecting your orders as a high GMV seller. Our team is prioritizing your case and will provide updates as soon as possible. Thank you for your patience.",
+  "policy": {
+    "model_urgency": "high",
+    "minimum_urgency": "low",
+    "enforced_urgency": "high",
+    "urgency_overridden": false,
+    "enforcement_reason": "No high-risk urgency signals detected.",
+    "prompt_injection_detected": false,
+    "update_minimum_urgency": "medium",
+    "update_enforcement_reason": "Detected a support issue that is not clearly urgent or critical.",
+    "update_prompt_injection_detected": false
+  },
+  "updated_at": "2026-06-16T18:01:20.783Z",
+  "updates": [
+    {
+      "added_at": "2026-06-16T18:00:54.328Z",
+      "additional_details": "The customer receives an 'internal server error' message when clicking the login button.",
+      "summary_update": "Customer encounters an internal server error when attempting to log in."
+    },
+    {
+      "added_at": "2026-06-16T18:01:20.783Z",
+      "additional_details": "The customer is a high GMV seller and the login issue is impacting their orders.",
+      "summary_update": "High GMV seller unable to log in, impacting order processing."
+    }
+  ]
+}

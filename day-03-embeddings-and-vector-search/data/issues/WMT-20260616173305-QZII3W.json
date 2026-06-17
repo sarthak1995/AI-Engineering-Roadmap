@@ -1,0 +1,18 @@
+{
+  "issue_id": "WMT-20260616173305-QZII3W",
+  "status": "created",
+  "created_at": "2026-06-16T17:33:05.527Z",
+  "customer_issue": "Customer is dissatisfied with the design and is expressing frustration, but there is no indication of a safety risk, fraud, or urgent functional issue.",
+  "category": "product_quality",
+  "urgency": "critical",
+  "summary": "Customer expressed dissatisfaction with product design.",
+  "suggested_response": "Thank you for your feedback regarding the product design. We appreciate your input and will share it with our design team for future improvements.",
+  "policy": {
+    "model_urgency": "low",
+    "minimum_urgency": "critical",
+    "enforced_urgency": "critical",
+    "urgency_overridden": true,
+    "enforcement_reason": "Detected safety, fraud, legal, account takeover, or outage risk.",
+    "prompt_injection_detected": false
+  }
+}
