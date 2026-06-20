@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Enterprise Offline Ingestion Pipeline Canvas</title>
+    <style>
+      :root {
+        --paper: #f7f4ea;
+        --ink: #17201b;
+        --muted: #59645d;
+        --line: #d6ceb9;
+        --panel: #fffaf0;
+        --green: #1f6b4e;
+        --green-soft: #dcecdf;
+        --amber: #c57a1f;
+        --amber-soft: #f4dfb8;
+        --coral: #c7523b;
+        --coral-soft: #f2d6ca;
+        --blue: #356a75;
+        --blue-soft: #d9e8ea;
+        --shadow: 0 18px 50px rgba(43, 35, 20, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background:
+          linear-gradient(135deg, rgba(31, 107, 78, 0.08), transparent 30%),
+          linear-gradient(225deg, rgba(197, 122, 31, 0.12), transparent 36%),
+          var(--paper);
+        color: var(--ink);
+        font-family: Georgia, "Times New Roman", serif;
+        line-height: 1.5;
+      }
+
+      main {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      header {
+        min-height: 88vh;
+        display: grid;
+        align-content: center;
+        gap: 28px;
+        padding: 56px 0 34px;
+      }
+
+      .eyebrow {
+        color: var(--green);
+        font-family: "Trebuchet MS", Verdana, sans-serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        line-height: 1.05;
+      }
+
+      h1 {
+        max-width: 920px;
+        font-size: clamp(3.2rem, 8vw, 7.4rem);
+        letter-spacing: 0;
+      }
+
+      h2 {
+        font-size: clamp(2rem, 4vw, 4rem);
+        margin-bottom: 20px;
+      }
+
+      h3 {
+        font-size: 1.35rem;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .lead {
+        max-width: 720px;
+        color: var(--muted);
+        font-size: clamp(1.2rem, 2vw, 1.55rem);
+      }
+
+      .hero-strip {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding-top: 20px;
+      }
+
+      .tag {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 250, 240, 0.78);
+        color: var(--muted);
+        font-family: "Trebuchet MS", Verdana, sans-serif;
+        font-size: 0.9rem;
+        padding: 8px 12px;
+      }
+
+      section {
+        padding: 58px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .section-head {
+        max-width: 760px;
+        margin-bottom: 24px;
+      }
+
+      .section-head p {
+        color: var(--muted);
+        font-size: 1.08rem;
+      }
+
+      .pipeline {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(150px, 1fr));
+        gap: 14px;
+      }
+
+      .block,
+      .pattern,
+      .stage,
+      .code-panel,
+      .note {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 250, 240, 0.88);
+        box-shadow: var(--shadow);
+      }
+
+      .block {
+        min-height: 116px;
+        padding: 16px;
+        position: relative;
+      }
+
+      .block::after {
+        content: ">";
+        position: absolute;
+        right: -13px;
+        top: 50%;
+        translate: 0 -50%;
+        color: var(--amber);
+        font-family: "Trebuchet MS", Verdana, sans-serif;
+        font-weight: 800;
+      }
+
+      .block:nth-child(5n)::after,
+      .block:last-child::after {
+        display: none;
+      }
+
+      .block span,
+      .stage span {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--green-soft);
+        color: var(--green);
+        font-family: "Trebuchet MS", Verdana, sans-serif;
+        font-weight: 800;
+        margin-bottom: 12px;
+      }
+
+      .block p,
+      .stage p,
+      .pattern p,
+      .note p {
+        color: var(--muted);
+        font-family: "Trebuchet MS", Verdana, sans-serif;
+        font-size: 0.95rem;
+      }
+
+      .patterns {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .pattern {
+        padding: 20px;
+      }
+
+      .mini-flow {
+        display: flex;
+        align-items: stretch;
+        gap: 8px;
+        margin: 18px 0;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .mini-flow div {
+        flex: 0 0 auto;
+        min-width: 118px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 10px;
+        background: var(--green-soft);
+        color: var(--ink);
+        font-family: "Trebuchet MS", Verdana, sans-serif;
+        font-size: 0.86rem;
+        font-weight: 700;
+      }
+
+      .mini-flow div:nth-child(2n) {
+        background: var(--amber-soft);
+      }
+
+      .mini-flow div:nth-child(3n) {
+        background: var(--blue-soft);
+      }
+
+      .mini-flow div:nth-child(4n) {
+        background: var(--coral-soft);
+      }
+
+      .stages {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .stage {
+        padding: 16px;
+        min-height: 158px;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        align-items: start;
+      }
+
+      pre {
+        margin: 0;
+        overflow-x: auto;
+        padding: 20px;
+        color: #f9f4e8;
+        background: #17201b;
+        border-radius: 8px;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        font-size: 0.9rem;
+        line-height: 1.55;
+      }
+
+      .note {
+        padding: 20px;
+      }
+
+      .note-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .note-list p {
+        border-left: 5px solid var(--amber);
+        padding-left: 12px;
+      }
+
+      @media (max-width: 960px) {
+        .pipeline,
+        .stages,
+        .patterns,
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+
+        .block::after {
+          display: none;
+        }
+
+        header {
+          min-height: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">AI Engineering Roadmap - Day 3 / Day 4 Bridge</p>
+          <h1>Enterprise Offline Ingestion Pipeline Canvas</h1>
+        </div>
+        <p class="lead">
+          A visual map for preparing enterprise knowledge so it can be searched by meaning,
+          upserted into a vector database, and later used by RAG or chat systems.
+        </p>
+        <div class="hero-strip" aria-label="Pipeline themes">
+          <span class="tag">Batch jobs</span>
+          <span class="tag">Async workers</span>
+          <span class="tag">Queues and retries</span>
+          <span class="tag">Chunking</span>
+          <span class="tag">Embeddings</span>
+          <span class="tag">Vector DB upsert</span>
+        </div>
+      </header>
+
+      <section>
+        <div class="section-head">
+          <h2>Core Pipeline</h2>
+          <p>The offline pipeline prepares clean, searchable chunks before the chat app ever receives a user question.</p>
+        </div>
+        <div class="pipeline" aria-label="Core ingestion pipeline">
+          <article class="block"><span>1</span><h3>Sources</h3><p>Docs, tickets, wikis, PDFs, databases, websites.</p></article>
+          <article class="block"><span>2</span><h3>Extract</h3><p>Pull raw files, text, timestamps, and source IDs.</p></article>
+          <article class="block"><span>3</span><h3>Parse</h3><p>Convert PDF, HTML, Markdown, and JSON into readable text.</p></article>
+          <article class="block"><span>4</span><h3>Clean</h3><p>Normalize spaces, remove boilerplate, fix noisy formatting.</p></article>
+          <article class="block"><span>5</span><h3>Dedupe</h3><p>Skip repeated documents and repeated chunks.</p></article>
+          <article class="block"><span>6</span><h3>Metadata</h3><p>Add source, type, owner, category, version, access level.</p></article>
+          <article class="block"><span>7</span><h3>Chunk</h3><p>Split text into meaningful pieces with stable IDs.</p></article>
+          <article class="block"><span>8</span><h3>Embed</h3><p>Turn each chunk into a vector using an embedding model.</p></article>
+          <article class="block"><span>9</span><h3>Validate</h3><p>Check empty text, missing metadata, and embedding failures.</p></article>
+          <article class="block"><span>10</span><h3>Upsert</h3><p>Insert new vectors, update changed vectors, delete removed ones.</p></article>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2>Execution Patterns</h2>
+          <p>In enterprises, ingestion usually runs as background infrastructure, not inside the live chat request.</p>
+        </div>
+        <div class="patterns">
+          <article class="pattern">
+            <h3>Scheduled Batch</h3>
+            <div class="mini-flow">
+              <div>Scheduler</div><div>Scan Sources</div><div>Find Changes</div><div>Pipeline</div><div>Upsert</div><div>Report</div>
+            </div>
+            <p>Best when freshness can be hourly or nightly. Example: index updated policies every night at 2 AM.</p>
+          </article>
+
+          <article class="pattern">
+            <h3>Event-Driven Workers</h3>
+            <div class="mini-flow">
+              <div>Doc Updated</div><div>Event</div><div>Queue</div><div>Worker</div><div>Embed</div><div>Upsert</div>
+            </div>
+            <p>Best when changed documents should become searchable quickly. Example: CMS update triggers re-indexing.</p>
+          </article>
+
+          <article class="pattern">
+            <h3>Queue With Retries</h3>
+            <div class="mini-flow">
+              <div>Job</div><div>Queue</div><div>Worker</div><div>Success?</div><div>Retry</div><div>Dead Letter</div>
+            </div>
+            <p>Best when parsing, embedding, or DB writes can fail. Repeated failures move to manual review.</p>
+          </article>
+
+          <article class="pattern">
+            <h3>Full Rebuild</h3>
+            <div class="mini-flow">
+              <div>All Docs</div><div>New Pipeline</div><div>New Index</div><div>Validate</div><div>Swap</div><div>Archive Old</div>
+            </div>
+            <p>Needed when changing embedding model, chunking strategy, metadata schema, or vector database.</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2>Stage Notes</h2>
+          <p>Each stage makes retrieval better, safer, or easier to debug.</p>
+        </div>
+        <div class="stages">
+          <article class="stage"><span>A</span><h3>Parse</h3><p>Make every source look like consistent text before downstream processing.</p></article>
+          <article class="stage"><span>B</span><h3>Clean</h3><p>Remove text noise because embeddings preserve both meaning and junk.</p></article>
+          <article class="stage"><span>C</span><h3>Dedupe</h3><p>Avoid duplicate chunks crowding search results and wasting embedding cost.</p></article>
+          <article class="stage"><span>D</span><h3>Metadata</h3><p>Enable filters like policy only, refund only, internal only, latest version only.</p></article>
+          <article class="stage"><span>E</span><h3>Validate</h3><p>Catch empty chunks, wrong access labels, failed embeddings, and bad source IDs.</p></article>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2>Upsert Shape</h2>
+          <p>The vector database stores the chunk, its embedding, and metadata needed for filtering and source tracing.</p>
+        </div>
+        <div class="two-col">
+          <pre><code>const record = {
+  id: "refund-policy:v3:chunk-04",
+  text: "Refunds are processed within 5-7 business days.",
+  embedding: [0.12, -0.44, 0.08, 0.91],
+  metadata: {
+    source: "refund-policy.pdf",
+    source_type: "policy",
+    category: "refund",
+    section: "refund timeline",
+    version: "v3",
+    updated_at: "2026-06-20",
+    access_level: "internal"
+  }
+};</code></pre>
+          <div class="note note-list">
+            <p><strong>Insert:</strong> the chunk is new and has no existing vector record.</p>
+            <p><strong>Update:</strong> the source changed, so old chunk vectors need replacement.</p>
+            <p><strong>Delete:</strong> the source was removed or replaced by a new version.</p>
+            <p><strong>Do not mix:</strong> embeddings from different models in the same vector index.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2>Pseudo Code</h2>
+          <p>This is the whole offline pipeline in implementation-shaped form.</p>
+        </div>
+        <pre><code>const rawDocs = await loadFromSources();
+
+for (const rawDoc of rawDocs) {
+  const parsedText = await parseDocument(rawDoc);
+  const cleanText = cleanDocumentText(parsedText);
+
+  if (isDuplicateDocument(cleanText)) continue;
+
+  const metadata = buildMetadata(rawDoc);
+  const chunks = chunkText(cleanText, metadata);
+
+  for (const chunk of chunks) {
+    if (isDuplicateChunk(chunk.text)) continue;
+
+    const embedding = await embed(chunk.text);
+
+    await vectorDb.upsert({
+      id: chunk.id,
+      text: chunk.text,
+      embedding,
+      metadata: chunk.metadata
+    });
+  }
+}</code></pre>
+      </section>
+    </main>
+  </body>
+</html>
